@@ -21,11 +21,7 @@
             console.log(msg);
         }
     
-    
-    
-        var page,
-            total,
-            url = '';
+        
         
         $.ajax({
             url: 'data.php',
@@ -49,6 +45,10 @@
                 }
     
                 if (data.pages) {
+    
+                    var page,
+                        total,
+                        url = '';
                     
                     data.pages['page'] = Number(data.pages['page']);
                     data.pages['total'] = Number(data.pages['total']);
@@ -72,7 +72,7 @@
                         url += '</li>';
                     }
     
-    if(page-1!=0) {
+    if(page!=1) {
         url += '<li>';
         url += '<a>';
         url += page - 1;
@@ -87,7 +87,7 @@
                     url += '</li>';
                     
                     
-    if(page+1!=total) {
+    if(page!=total) {
         url += '<li>';
         url += '<a>';
         url += page + 1;
@@ -123,6 +123,9 @@
     
         $('#page2reigth,#page1reigth,#page1left,#page2left').click(function (e) {
            e.preventDefault();
+           
+           var page=$('.active').val();
+           
            
            
             if(this.id=='page2reigth'){
