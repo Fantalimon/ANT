@@ -1,9 +1,15 @@
 <div class="row">
     <div class="navbar text-center ">
-        <ul class="navbar-form navbar-fixed-bottom">
-            <ul id="page" class="pagination">
-            
+        <div id="page">
+            <ul class="navbar-fixed-bottom paginator">
+            <li>
+                <button id="page2left"  class="btn btn-sm btn-danger" ><<</button>
+                <button id="page1left"  class="btn btn-sm btn-danger" ><</button>
+                <button id="page1reigth"  class="btn btn-sm btn-danger" >></button>
+                <button id="page2reigth"  class="btn btn-sm btn-danger" >>></button>
+            </li>
             </ul>
+        </div>
     </div>
 </div>
 

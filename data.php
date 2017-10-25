@@ -7,7 +7,6 @@ $response=[];
 
 $page = isset($_POST['page']) ? mb_substr(htmlspecialchars(strip_tags(trim($_POST['page']))), 0, 20, 'UTF-8') : 1;
 
-
 $pageinlist = PAGEINLIST;
 
 

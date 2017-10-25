@@ -21,7 +21,8 @@
             console.log(msg);
         }
     
-        
+        var page,
+            total;
         
         $.ajax({
             url: 'data.php',
@@ -45,10 +46,6 @@
                 }
     
                 if (data.pages) {
-    
-                    var page,
-                        total,
-                        url = '';
                     
                     data.pages['page'] = Number(data.pages['page']);
                     data.pages['total'] = Number(data.pages['total']);
@@ -56,62 +53,50 @@
                     page = data.pages['page'];
                     total = data.pages['total'];
                     
-                    if (page != 1) {
-                        url += '<li id="page2left">';
-                        url += '<a >';
+                   
+                   /*    if (page != 1) {
+                        url += '<button id="page2left">';
                         url += '<<';
-                        url += '</a>';
-                        url += '</li>';
+                        url += '</button>';
                     }
+                    
                     if(page > 1)
                     {
-                        url += '<li id="page1left">';
-                        url += '<a >';
+                        url += '<button id="page1left">';
                         url += '<';
-                        url += '</a>';
-                        url += '</li>';
+                        url += '</buttton>';
                     }
     
     if(page!=1) {
-        url += '<li>';
-        url += '<a>';
+        url += '<button>';
         url += page - 1;
-        url += '</a>';
-        url += '</li>';
+        url += '</button>';
     }
     
-                    url += '<li class="active">';
-                    url += '<a>';
+                    url += '<buttonclass="active">';
                     url += page;
-                    url += '</a>';
-                    url += '</li>';
+                    url += '</button>';
                     
                     
     if(page!=total) {
-        url += '<li>';
-        url += '<a>';
+        url += '<button>';
         url += page + 1;
-        url += '</a>';
-        url += '</li>';
+        url += '</button>';
     }
         
                     if (page < total-1) {
-                        url += '<li id="page1reigth">';
-                        url += '<a >';
+                        url += '<button id="page1reigth">';
                         url += '>';
-                        url += '</a>';
-                        url += '</li>';
+                        url += '</button>';
                     }
                     
                     if(page!=total) {
-                        url += '<li id="page2reigth">';
-                        url += '<a >';
+                        url += '<button id="page2reigth">';
                         url += '>>';
-                        url += '</a>';
-                        url += '</li>';
-                    }
+                        url += '</button>';
+                    }*/
                     
-                    $('#page').html(url);
+                    
                 }
                 
             }),
@@ -121,53 +106,35 @@
         });
     
     
-        $('#page2reigth,#page1reigth,#page1left,#page2left').click(function (e) {
-           e.preventDefault();
-           
-           var page=$('.active').val();
-           
-           
-           
-            if(this.id=='page2reigth'){
-                page = page + 2;
-            }
-            if(this.id=='page1reigth'){
-                page = page + 1;
-            }
-            if(this.id=='page2left'){
-                page = page - 2;
-            }
-            if(this.id=='page1left'){
-                page = page - 1;
-            }
-    
-            
-            $.ajax({
-                url: 'data.php',
-                type: 'POST',
-                dataType: 'json',
-                data:{page:page},
-                error: (function (jqXHR, exception) {
-                    getErrorMessage(jqXHR, exception)
-                })
-            });
-            
-        });
+        
     
     
-    
-    
-        $('#nameUP,#nameDOUN,#ballsUP,#ballsDOUN,#mygroupUP,#mygroupDOUN,#seurnameUP,#seurnameDOUN,#tofind').click(
+        $('#nameUP,#nameDOUN,#ballsUP,#ballsDOUN,#mygroupUP,#mygroupDOUN,#seurnameUP,#seurnameDOUN,#tofind,#page2reigth,#page1reigth,#page1left,#page2left').click(
             function (e) {
                 e.preventDefault();
                 
                     var find = $('#find').val();
-                   
-                if (this.id == 'nameUP' || this.id=='tofind') {
+    
+    
+                if(this.id=='page2reigth'){
+                    page =page + 2;
+                }
+                if(this.id=='page1reigth'){
+                    page = page + 1;
+                }
+                if(this.id=='page2left'){
+                    page = page - 2;
+                }
+                if(this.id=='page1left'){
+                    page = page - 1;
+                }
+                    
+                    
+                if (this.id == 'nameUP' || this.id=='tofind' || this.id=='page2reigth'||this.id=='page1reigth'||this.id=='page2left'||this.id=='page1left') {
                     $.ajax({
                         url: 'data.php',
                         type: 'POST',
-                        data:{status:'nameUP',find:find},
+                        data:{status:'nameUP',find:find,page:page},
                         cache: false,
                         dataType: 'json',
                         success: (function (data) {
@@ -187,11 +154,11 @@
                             getErrorMessage(jqXHR, exception)
                         })
                     });
-                } else if (this.id == 'nameDOUN' || this.id=='tofind') {
+                } else if (this.id == 'nameDOUN' || this.id=='tofind' || this.id=='page2reigth'||this.id=='page1reigth'||this.id=='page2left'||this.id=='page1left') {
                     $.ajax({
                         url: 'data.php',
                         type: 'POST',
-                        data:{status:'nameDOUN',find:find},
+                        data:{status:'nameDOUN',find:find,page:page},
                         cache: false,
                         dataType: 'json',
                         success: (function (data) {
@@ -211,11 +178,11 @@
                             getErrorMessage(jqXHR, exception)
                         })
                     });
-                } else if (this.id == 'ballsUP' || this.id=='tofind') {
+                } else if (this.id == 'ballsUP' || this.id=='tofind'|| this.id=='page2reigth'||this.id=='page1reigth'||this.id=='page2left'||this.id=='page1left') {
                     $.ajax({
                         url: 'data.php',
                         type: 'POST',
-                        data:{status:'ballsUP',find:find},
+                        data:{status:'ballsUP',find:find,page:page},
                         cache: false,
                         dataType: 'json',
                         success: (function (data) {
@@ -235,11 +202,11 @@
                             getErrorMessage(jqXHR, exception)
                         })
                     });
-                } else if (this.id == 'ballsDOUN'|| this.id=='tofind') {
+                } else if (this.id == 'ballsDOUN'|| this.id=='tofind'|| this.id=='page2reigth'||this.id=='page1reigth'||this.id=='page2left'||this.id=='page1left') {
                     $.ajax({
                         url: 'data.php',
                         type: 'POST',
-                        data:{status:'ballsDOUN',find:find},
+                        data:{status:'ballsDOUN',find:find,page:page},
                         dataType: 'json',
                         success: (function (data) {
                             if (data.ballsDESC) {
@@ -261,11 +228,11 @@
                             getErrorMessage(jqXHR, exception)
                         })
                     });
-                } else if (this.id == 'mygroupUP' || this.id=='tofind' ) {
+                } else if (this.id == 'mygroupUP' || this.id=='tofind' || this.id=='page2reigth'||this.id=='page1reigth'||this.id=='page2left'||this.id=='page1left') {
                     $.ajax({
                         url: 'data.php',
                         type: 'POST',
-                        data:{status:'mygroupUP',find:find},
+                        data:{status:'mygroupUP',find:find,page:page},
                         dataType: 'json',
                         success: (function (data) {
                             if (data.mygroupASC) {
@@ -287,11 +254,11 @@
                             getErrorMessage(jqXHR, exception)
                         })
                     });
-                } else if (this.id == 'mygroupDOUN'|| this.id=='tofind') {
+                } else if (this.id == 'mygroupDOUN'|| this.id=='tofind'|| this.id=='page2reigth'||this.id=='page1reigth'||this.id=='page2left'||this.id=='page1left') {
                     $.ajax({
                         url: 'data.php',
                         type: 'POST',
-                        data:{status:'mygroupDOUN',find:find},
+                        data:{status:'mygroupDOUN',find:find,page:page},
                         dataType: 'json',
                         success: (function (data) {
                             if (data.mygroupDESC) {
@@ -313,11 +280,11 @@
                             getErrorMessage(jqXHR, exception)
                         })
                     });
-                } else if (this.id == 'seurnameUP' || this.id=='tofind') {
+                } else if (this.id == 'seurnameUP' || this.id=='tofind'|| this.id=='page2reigth'||this.id=='page1reigth'||this.id=='page2left'||this.id=='page1left') {
                     $.ajax({
                         url: 'data.php',
                         type: 'POST',
-                        data:{status:'seurnameUP',find:find},
+                        data:{status:'seurnameUP',find:find,page:page},
                         dataType: 'json',
                         success: (function (data) {
                             if (data.seurnameASC) {
@@ -339,11 +306,11 @@
                             getErrorMessage(jqXHR, exception)
                         })
                     });
-                } else if (this.id == 'seurnameDOUN' || this.id=='tofind') {
+                } else if (this.id == 'seurnameDOUN' || this.id=='tofind' || this.id=='page2reigth'||this.id=='page1reigth'||this.id=='page2left'||this.id=='page1left') {
                     $.ajax({
                         url: 'data.php',
                         type: 'POST',
-                        data:{status:'seurnameDOUN',find:find},
+                        data:{status:'seurnameDOUN',find:find,page:page},
                         dataType: 'json',
                         success: (function (data) {
                             if (data.seurnameDESC) {
