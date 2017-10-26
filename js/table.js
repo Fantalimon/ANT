@@ -109,11 +109,11 @@
         
     
     
-        $('#nameUP,#nameDOUN,#ballsUP,#ballsDOUN,#mygroupUP,#mygroupDOUN,#seurnameUP,#seurnameDOUN,#tofind,#page2reigth,#page1reigth,#page1left,#page2left').click(
-            function (e) {
+        $('#nameUP,#nameDOUN,#ballsUP,#ballsDOUN,#mygroupUP,#mygroupDOUN,#seurnameUP,#seurnameDOUN,#tofind,#page2reigth,#page1reigth,#page1left,#page2left').click(function (e) {
+            
                 e.preventDefault();
                 
-                    var find = $('#find').val();
+                var find = $('#find').val();
     
     
                 if(this.id=='page2reigth'){
@@ -138,16 +138,18 @@
                         cache: false,
                         dataType: 'json',
                         success: (function (data) {
-                            let user = '';
-                            let ctn = data.nameASC.length;
-                            for (let i = 0; i < ctn; i++) {
-                                user += '<tr>';
-                                user += '<td>' + data.nameASC[i]['name'] + '</td>';
-                                user += '<td>' + data.nameASC[i]['seurname'] + '</td>';
-                                user += '<td>' + data.nameASC[i]['mygroup'] + '</td>';
-                                user += '<td>' + data.nameASC[i]['balls'] + '</td>';
-                                user += '</tr>';
-                                $('tbody').html(user);
+                            if (data.nameASC) {
+                                let user = '';
+                                let ctn = data.nameASC.length;
+                                for (let i = 0; i < ctn; i++) {
+                                    user += '<tr>';
+                                    user += '<td>' + data.nameASC[i]['name'] + '</td>';
+                                    user += '<td>' + data.nameASC[i]['seurname'] + '</td>';
+                                    user += '<td>' + data.nameASC[i]['mygroup'] + '</td>';
+                                    user += '<td>' + data.nameASC[i]['balls'] + '</td>';
+                                    user += '</tr>';
+                                    $('tbody').html(user);
+                                }
                             }
                         }),
                         error: (function (jqXHR, exception) {
@@ -162,16 +164,18 @@
                         cache: false,
                         dataType: 'json',
                         success: (function (data) {
-                            let user = '';
-                            let ctn = data.nameDESC.length;
-                            for (let i = 0; i < ctn; i++) {
-                                user += '<tr>';
-                                user += '<td>' + data.nameDESC[i]['name'] + '</td>';
-                                user += '<td>' + data.nameDESC[i]['seurname'] + '</td>';
-                                user += '<td>' + data.nameDESC[i]['mygroup'] + '</td>';
-                                user += '<td>' + data.nameDESC[i]['balls'] + '</td>';
-                                user += '</tr>';
-                                $('tbody').html(user);
+                            if(data.nameDESC) {
+                                let user = '';
+                                let ctn = data.nameDESC.length;
+                                for (let i = 0; i < ctn; i++) {
+                                    user += '<tr>';
+                                    user += '<td>' + data.nameDESC[i]['name'] + '</td>';
+                                    user += '<td>' + data.nameDESC[i]['seurname'] + '</td>';
+                                    user += '<td>' + data.nameDESC[i]['mygroup'] + '</td>';
+                                    user += '<td>' + data.nameDESC[i]['balls'] + '</td>';
+                                    user += '</tr>';
+                                    $('tbody').html(user);
+                                }
                             }
                         }),
                         error: (function (jqXHR, exception) {
@@ -186,6 +190,7 @@
                         cache: false,
                         dataType: 'json',
                         success: (function (data) {
+                            if(data.ballsASC){
                             let user = '';
                             let ctn = data.ballsASC.length;
                             for (let i = 0; i < ctn; i++) {
@@ -197,6 +202,7 @@
                                 user += '</tr>';
                                 $('tbody').html(user);
                             }
+                         }
                         }),
                         error: (function (jqXHR, exception) {
                             getErrorMessage(jqXHR, exception)
