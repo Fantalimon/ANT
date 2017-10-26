@@ -106,7 +106,7 @@ echo json_encode($error);
     if($result==true){
         $_SESSION['userdata']=serialize($user);
       setcookie('sit',session_id(),strtotime('10 year'));
-//        header('location: ' . SITE);
+        header('location: ' . SITE);
     }
     
 };
