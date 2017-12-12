@@ -214,6 +214,7 @@
                         }),
                         complete: (clearInputform(myform)),
 
+                        
                     });
                 
                     $('#Reg').modal('hide');
